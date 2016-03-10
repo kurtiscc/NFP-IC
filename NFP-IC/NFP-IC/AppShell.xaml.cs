@@ -27,28 +27,28 @@ namespace NFP_IC
             {
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Contact,
-                    Label = "Page1",
-                    DestinationPage = typeof(Views.Page1)
+                    Symbol = Symbol.People,
+                    Label = "Browse/Search Patients",
+                    DestinationPage = typeof(Views.SearchBrowseView)
                 },
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Edit,
-                    Label = "Page2",
-                    DestinationPage = typeof(Views.Page2)
+                    Symbol = Symbol.Map,
+                    Label = "Track Sample",
+                    DestinationPage = typeof(Views.TrackSampleView)
                 },
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Favorite,
-                    Label = "Page3",
-                    DestinationPage = typeof(Views.Page3)
+                    Symbol = Symbol.Find,
+                    Label = "Read Existing Sample",
+                    DestinationPage = typeof(Views.ReadExistingSampleView)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Link,
-                    Label = "Download Source Code",
+                    Label = "NFP Website",
                     DestinationPage = typeof(Uri),
-                    Arguments = "http://scottge.net/product/uwp-windows-10-sample-navigation-panes",
+                    Arguments = "http://nfp.capstone.it.et.byu.edu",
                 }
             });
 
