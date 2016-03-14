@@ -9,11 +9,17 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-		EntranceNavigationTransitionInfo.IsTargetElement="True">
+          
+          EntranceNavigationTransitionInfo.IsTargetElement="True">
 
-        <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Read Existing Sample"/>
+        <!-- <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Read Existing Sample"/>-->
 
+
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Click To Scan a Tag" Click="Scan_Button_Clicked">
+            <!--   <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Click To Scan a Tag" SelectionChanged="TextBlock_SelectionChanged" ></TextBlock>-->
+        </Button> 
         <Maps:MapControl HorizontalAlignment="Center" Margin="0,420,0,0" VerticalAlignment="Top" Height="220" Width="360"/>
 
     </Grid>
+    
 </Page>
