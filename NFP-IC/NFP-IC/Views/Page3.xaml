@@ -8,9 +8,15 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          
           EntranceNavigationTransitionInfo.IsTargetElement="True">
 
-        <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Read Existing Sample"/>
+        <!-- <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Read Existing Sample"/>-->
 
+
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Click To Scan a Tag" Click="Scan_Button_Clicked">
+            <!--   <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Click To Scan a Tag" SelectionChanged="TextBlock_SelectionChanged" ></TextBlock>-->
+        </Button> 
     </Grid>
+    
 </Page>
