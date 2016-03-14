@@ -1,16 +1,19 @@
 ﻿<Page
-    x:Class="NFP_IC.Views.ReadExistingSampleView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NFP_IC.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    x:Class="NFP_IC.Views.ReadExistingSampleView"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-          EntranceNavigationTransitionInfo.IsTargetElement="True">
+		EntranceNavigationTransitionInfo.IsTargetElement="True">
 
         <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Read Existing Sample"/>
+
+        <Maps:MapControl HorizontalAlignment="Center" Margin="0,420,0,0" VerticalAlignment="Top" Height="220" Width="360"/>
 
     </Grid>
 </Page>

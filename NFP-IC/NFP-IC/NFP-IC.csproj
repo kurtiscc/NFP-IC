@@ -108,11 +108,11 @@
     <Compile Include="Views\SearchBrowseView.xaml.cs">
       <DependentUpon>SearchBrowseView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Page2.xaml.cs">
-      <DependentUpon>Page2.xaml</DependentUpon>
+    <Compile Include="Views\TrackSampleView.xaml.cs">
+      <DependentUpon>TrackSampleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Page3.xaml.cs">
-      <DependentUpon>Page3.xaml</DependentUpon>
+    <Compile Include="Views\ReadExistingSampleView.xaml.cs">
+      <DependentUpon>ReadExistingSampleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -157,11 +157,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Page2.xaml">
+    <Page Include="Views\TrackSampleView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Page3.xaml">
+    <Page Include="Views\ReadExistingSampleView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
