@@ -146,7 +146,7 @@ namespace NFP_IC.Views
             tempSet.lat = lat;
             tempSet.lon = lng;
             tempSet.purpose = "Testing";
-            tempSet.timestamp = "00:00:00";
+            tempSet.timestamp = getCurrentTimeStamp();
             string json = JsonConvert.SerializeObject(tempSet);
 
             //POSTing
@@ -157,5 +157,12 @@ namespace NFP_IC.Views
             msg.Content.Headers.ContentType = new Windows.Web.Http.Headers.HttpMediaTypeHeaderValue("application/json");
             HttpResponseMessage response = await httpClient.SendRequestAsync(msg).AsTask();
          }
+        private string getCurrentTimeStamp()
+        {
+            var utcOffset = TimeZoneInfo.Local.GetUtcOffset(DateTime.UtcNow);
+            var formattedOffset = utcOffset.ToString("hhmm");
+            var timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff'-'"+ formattedOffset);
+            return timestamp;
+        }
     }
 }
