@@ -29,7 +29,7 @@ namespace NFP_IC.Views
     {
         public string lat;
         public string lon;
-        public string address;
+        public string addr;
         public string purpose;
         public string timestamp;
 
@@ -142,7 +142,7 @@ namespace NFP_IC.Views
             //Creating JSON
             string tagID = "F2DDBA18000104E0";
             PostAddressSet tempSet = new PostAddressSet();
-            tempSet.address = address;
+            tempSet.addr = address;
             tempSet.lat = lat;
             tempSet.lon = lng;
             tempSet.purpose = "Testing";
