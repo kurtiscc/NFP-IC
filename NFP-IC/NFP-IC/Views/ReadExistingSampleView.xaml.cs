@@ -12,12 +12,28 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Diagnostics;
 using Windows.Services.Maps;
+using Newtonsoft.Json;
+using System.Net;
+using Windows.Web.Http;
+
 
 namespace NFP_IC.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+    /// 
+
+    //struct is used for creating an object to be converted to json in the function sendDataToEndpoint
+    public struct PostAddressSet
+    {
+        public string lat;
+        public string lon;
+        public string address;
+        public string purpose;
+        public string timestamp;
+
+    }
     public sealed partial class ReadExistingSampleView : Page
     {
 
@@ -121,9 +137,25 @@ namespace NFP_IC.Views
             }
         }
 
-        private void sendDataToEndpoint(String address, String lat, String lng)
+        private async void sendDataToEndpoint(String address, String lat, String lng)
         {
-            // This one is for you Dmitry
-        }
+            //Creating JSON
+            string tagID = "F2DDBA18000104E0";
+            PostAddressSet tempSet = new PostAddressSet();
+            tempSet.address = address;
+            tempSet.lat = lat;
+            tempSet.lon = lng;
+            tempSet.purpose = "Testing";
+            tempSet.timestamp = "00:00:00";
+            string json = JsonConvert.SerializeObject(tempSet);
+
+            //POSTing
+            string serverAddress = "http://nfp-project.azurewebsites.net/addtrackingstep/"+tagID;
+            HttpClient httpClient = new HttpClient();
+            HttpRequestMessage msg = new HttpRequestMessage(new HttpMethod("POST"), new Uri(serverAddress));
+            msg.Content = new HttpStringContent(json);
+            msg.Content.Headers.ContentType = new Windows.Web.Http.Headers.HttpMediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = await httpClient.SendRequestAsync(msg).AsTask();
+         }
     }
 }
