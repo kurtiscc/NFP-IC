@@ -14,6 +14,21 @@
 
         <!-- <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Read Existing Sample"/>-->
 
+        
+        
+
+        <!--<ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+            <Grid x:Name="ContentPanel" Margin="12,0,12,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image Source="\Assets\NFC-device.png" Grid.Row="1"/>
+                <TextBlock x:Name="AppText" Grid.Row="0" />
+            </Grid>
+        </ScrollViewer>-->
+
+        <TextBlock x:Name="AppText" Grid.Row="0" />
 
         <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Click To Scan a Tag" Click="Scan_Button_Clicked">
             <!--   <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Click To Scan a Tag" SelectionChanged="TextBlock_SelectionChanged" ></TextBlock>-->
