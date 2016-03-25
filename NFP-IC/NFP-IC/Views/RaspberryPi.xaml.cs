@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.IO;
 using Windows.Devices.SerialCommunication;
+using Windows.Devices.Enumeration;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using Windows.Foundation;
 
 namespace NFP_IC.Views
 {
@@ -23,16 +26,38 @@ namespace NFP_IC.Views
         }
 
 
-        public static void startTheMagic()
+        async private void startTheMagic()
         {
-            SerialPort mySerialPort = new SerialPort("COM3");
+            //var nfcReader = SerialDevice.GetDeviceSelector("COM3");
+            //var devices = await DeviceInformation.FindAllAsync(nfcReader);
+            
+            //if (devices.Any())
+            //{
+            //    var deviceId = devices.First().Id;
+            //    this.device = await SerialDevice.FromIdAsync(deviceId);
 
+            //    if (this.device != null)
+            //    {
+            //        this.device.BaudRate = 115200;
+            //        this.device.StopBits = SerialStopBitCount.One;
+            //        this.device.DataBits = 8;
+            //        this.device.Parity = SerialParity.None;
+            //        this.device.Handshake = SerialHandshake.None;
+
+            //        this.reader = new DataReader(this.device.InputStream);
+            //    }
+            //}
+
+            SerialPort mySerialPort = new SerialPort("COM3");
             mySerialPort.BaudRate = 115200;
             mySerialPort.Parity = Parity.None;
             mySerialPort.StopBits = StopBits.One;
             mySerialPort.DataBits = 8;
             mySerialPort.Handshake = Handshake.None;
             mySerialPort.Open();
+
+            //var deviceSelector = SerialDevice.GetDeviceSelectorFromUsbVidPid(0x2341, 0x0043);
+            //SerialDevice.FromIdAsync
 
             while (true)
             {
@@ -58,7 +83,7 @@ namespace NFP_IC.Views
 
             //Write each of these commands to the scanner and then sleep
             mySerialPort.Write("010A0003041000200000");
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(100); // need to change to   await Task.Delay(TimeSpan.FromSeconds(100)); and function needs to be async and return a task or void
 
             mySerialPort.Write("010C00030410002101000000");
             System.Threading.Thread.Sleep(100);
