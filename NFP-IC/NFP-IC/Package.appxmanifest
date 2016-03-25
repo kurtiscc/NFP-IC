@@ -23,8 +23,14 @@
     </Application>
   </Applications>
   <Capabilities>
-    <Capability Name="internetClient" />
+    <Capability Name="internetClientServer" />
+    <uap:Capability Name="userAccountInformation" />
     <DeviceCapability Name="location" />
     <DeviceCapability Name="proximity" />
+    <DeviceCapability Name="serialcommunication">
+    <Device Id="any">
+      <Function Type="name:serialPort"/>
+    </Device>
+</DeviceCapability>
   </Capabilities>
 </Package>

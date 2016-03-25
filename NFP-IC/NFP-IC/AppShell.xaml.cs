@@ -29,7 +29,7 @@ namespace NFP_IC
                 {
                     Symbol = Symbol.People,
                     Label = "Browse/Search Patients",
-                    DestinationPage = typeof(Views.SearchBrowseView)
+                    DestinationPage = typeof(Views.RaspberryPi)
                 },
                 new NavMenuItem()
                 {

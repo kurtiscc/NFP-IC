@@ -109,8 +109,8 @@
     <Compile Include="NdefRecord.cs" />
     <Compile Include="NdefRecordTypeDefinitions.cs" />
     <Compile Include="NdefRecordUtility.cs" />
-    <Compile Include="Views\SearchBrowseView.xaml.cs">
-      <DependentUpon>SearchBrowseView.xaml</DependentUpon>
+    <Compile Include="Views\RaspberryPi.xaml.cs">
+      <DependentUpon>RaspberryPi.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrackSampleView.xaml.cs">
       <DependentUpon>TrackSampleView.xaml</DependentUpon>
@@ -157,7 +157,7 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\SearchBrowseView.xaml">
+    <Page Include="Views\RaspberryPi.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
