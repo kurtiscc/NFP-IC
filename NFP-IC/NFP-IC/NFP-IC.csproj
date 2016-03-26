@@ -104,11 +104,17 @@
     <Compile Include="Controls\PageHeader.xaml.cs">
       <DependentUpon>PageHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account.cs" />
     <Compile Include="NavMenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NdefRecord.cs" />
     <Compile Include="NdefRecordTypeDefinitions.cs" />
     <Compile Include="NdefRecordUtility.cs" />
+    <Compile Include="Utils\AccountHelper.cs" />
+    <Compile Include="Utils\MicrosoftPassportHelper.cs" />
+    <Compile Include="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SearchBrowseView.xaml.cs">
       <DependentUpon>SearchBrowseView.xaml</DependentUpon>
     </Compile>
@@ -156,6 +162,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchBrowseView.xaml">
       <Generator>MSBuild:Compile</Generator>
