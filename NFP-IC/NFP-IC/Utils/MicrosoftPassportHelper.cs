@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
+using NFP_IC.Models;
 
 namespace NFP_IC.Utils
 {
@@ -65,6 +66,69 @@ namespace NFP_IC.Utils
                     break;
             }
 
+            return false;
+        }
+
+        /// <summary>
+        /// Function to be called when user requests deleting their account.
+        /// Checks the KeyCredentialManager to see if there is a Passport for the current user
+        /// Then deletes the local key associated with the Passport.
+        /// </summary>
+        public static async void RemovePassportAccountAsync(Account account)
+        {
+            // Open the account with Passport
+            KeyCredentialRetrievalResult keyOpenResult = await KeyCredentialManager.OpenAsync(account.Username);
+
+            if (keyOpenResult.Status == KeyCredentialStatus.Success)
+            {
+                // In the real world you would send key information to server to unregister
+                //e.g. RemovePassportAccountOnServer(account);
+            }
+
+            // Then delete the account from the machines list of Passport Accounts
+            await KeyCredentialManager.DeleteAsync(account.Username);
+        }
+
+        /// <summary>
+        /// Attempts to sign a message using the Passport key on the system for the accountId passed.
+        /// </summary>
+        /// <returns>Boolean representing if creating the Passport authentication message succeeded</returns>
+        public static async Task<bool> GetPassportAuthenticationMessageAsync(Account account)
+        {
+            KeyCredentialRetrievalResult openKeyResult = await KeyCredentialManager.OpenAsync(account.Username);
+            // Calling OpenAsync will allow the user access to what is available in the app and will not require user credentials again.
+            // If you wanted to force the user to sign in again you can use the following:
+            // var consentResult = await Windows.Security.Credentials.UI.UserConsentVerifier.RequestVerificationAsync(account.Username);
+            // This will ask for the either the password of the currently signed in Microsoft Account or the PIN used for Microsoft Passport.
+
+            if (openKeyResult.Status == KeyCredentialStatus.Success)
+            {
+                // If OpenAsync has succeeded, the next thing to think about is whether the client application requires access to backend services.
+                // If it does here you would Request a challenge from the Server. The client would sign this challenge and the server
+                // would check the signed challenge. If it is correct it would allow the user access to the backend.
+                // You would likely make a new method called RequestSignAsync to handle all this
+                // e.g. RequestSignAsync(openKeyResult);
+                // Refer to the second Microsoft Passport sample for information on how to do this.
+
+                // For this sample there is not concept of a server implemented so just return true.
+                return true;
+            }
+            else if (openKeyResult.Status == KeyCredentialStatus.NotFound)
+            {
+                // If the _account is not found at this stage. It could be one of two errors. 
+                // 1. Microsoft Passport has been disabled
+                // 2. Microsoft Passport has been disabled and re-enabled cause the Microsoft Passport Key to change.
+                // Calling CreatePassportKey and passing through the account will attempt to replace the existing Microsoft Passport Key for that account.
+                // If the error really is that Microsoft Passport is disabled then the CreatePassportKey method will output that error.
+                if (await CreatePassportKeyAsync(account.Username))
+                {
+                    // If the Passport Key was again successfully created, Microsoft Passport has just been reset.
+                    // Now that the Passport Key has been reset for the _account retry sign in.
+                    return await GetPassportAuthenticationMessageAsync(account);
+                }
+            }
+
+            // Can&#39;t use Passport right now, try again later
             return false;
         }
     }

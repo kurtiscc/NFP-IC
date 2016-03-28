@@ -1,5 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
+using NFP_IC.Utils;
 
 namespace NFP_IC.Views
 {
@@ -14,9 +15,12 @@ namespace NFP_IC.Views
             Loaded += MainPage_Loaded;
         }
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        // THIS FUNCTION NEEDS TO BE ON THE LANDING PAGE FOR THE APP, IF YOU CHANGE THE LANDING PAGE THEN PLEASE MOVE THE FUNCTION
+        private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Login));
+            // Load the local Accounts List before navigating to the UserSelection page
+            await AccountHelper.LoadAccountListAsync();
+            Frame.Navigate(typeof(UserSelection));
         }
 
     }
