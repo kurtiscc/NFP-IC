@@ -11,7 +11,7 @@ using Windows.Devices.Enumeration;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Windows.Foundation;
-
+using Windows.Storage.Streams;
 namespace NFP_IC.Views
 {
 
@@ -24,30 +24,13 @@ namespace NFP_IC.Views
         {
             startTheMagic();
         }
-
-
         async private void startTheMagic()
         {
-            //var nfcReader = SerialDevice.GetDeviceSelector("COM3");
-            //var devices = await DeviceInformation.FindAllAsync(nfcReader);
-            
-            //if (devices.Any())
-            //{
-            //    var deviceId = devices.First().Id;
-            //    this.device = await SerialDevice.FromIdAsync(deviceId);
+            SerialDevice mySerialPort = null;
+            DataWriter dataWriterObject = null;
+            DataReader dataReaderObject = null;
 
-            //    if (this.device != null)
-            //    {
-            //        this.device.BaudRate = 115200;
-            //        this.device.StopBits = SerialStopBitCount.One;
-            //        this.device.DataBits = 8;
-            //        this.device.Parity = SerialParity.None;
-            //        this.device.Handshake = SerialHandshake.None;
-
-            //        this.reader = new DataReader(this.device.InputStream);
-            //    }
-            //}
-
+            comPortInput.IsEnabled = false;
             SerialPort mySerialPort = new SerialPort("COM3");
             mySerialPort.BaudRate = 115200;
             mySerialPort.Parity = Parity.None;
@@ -55,10 +38,7 @@ namespace NFP_IC.Views
             mySerialPort.DataBits = 8;
             mySerialPort.Handshake = Handshake.None;
             mySerialPort.Open();
-
-            //var deviceSelector = SerialDevice.GetDeviceSelectorFromUsbVidPid(0x2341, 0x0043);
-            //SerialDevice.FromIdAsync
-
+            
             while (true)
             {
 
