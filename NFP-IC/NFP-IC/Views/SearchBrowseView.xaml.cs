@@ -11,13 +11,10 @@ namespace NFP_IC.Views
         public SearchBrowseView()
         {
             this.InitializeComponent();
-            Loaded += MainPage_Loaded;
+         
         }
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Login));
-        }
+       
 
     }
 }
