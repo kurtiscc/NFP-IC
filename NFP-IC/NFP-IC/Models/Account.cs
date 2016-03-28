@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NFP_IC.Models
 {
-    class Account
+    public class Account
     {
         public string Username { get; set; }
     }

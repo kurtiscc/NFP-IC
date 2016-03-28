@@ -29,8 +29,7 @@ namespace NFP_IC.Views
             {
                 // Microsoft Passport is not setup so inform the user
                 PassportStatus.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 50, 170, 207));
-                PassportStatusText.Text = "Microsoft Passport is not setup!\n" +
-                    "Please go to Windows Settings and set up a PIN to use it.";
+                PassportStatusText.Text = "Microsoft Passport is not setup!\nPlease go to Windows Settings and set up a PIN to use it.";
                 PassportSignInButton.IsEnabled = false;
             }
         }
@@ -40,10 +39,12 @@ namespace NFP_IC.Views
             ErrorMessage.Text = "";
             SignInPassport();
         }
+
         private void RegisterButtonTextBlock_OnPointerPressed(object sender, PointerRoutedEventArgs e)
         {
             ErrorMessage.Text = "";
         }
+
         private async void SignInPassport()
         {
             if (AccountHelper.ValidateAccountCredentials(UsernameTextBox.Text))

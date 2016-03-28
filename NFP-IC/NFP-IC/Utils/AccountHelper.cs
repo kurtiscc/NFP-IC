@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
@@ -15,7 +16,7 @@ namespace NFP_IC.Utils
         // For this tutorial we will just be storing accounts locally.
         private const string USER_ACCOUNT_LIST_FILE_NAME = "accountlist.txt";
         private static string _accountListPath = Path.Combine(ApplicationData.Current.LocalFolder.Path, USER_ACCOUNT_LIST_FILE_NAME);
-        internal static List<Account> AccountList = new List<Account>();
+        public static List<Account> AccountList = new List<Account>();
 
         /// <summary>
         /// Create and save a useraccount list file. (Updating the old one)
@@ -40,7 +41,7 @@ namespace NFP_IC.Utils
         /// Gets the useraccount list file and deserializes it from XML to a list of useraccount objects.
         /// </summary>
         /// <returns>List of useraccount objects</returns>
-        internal static async Task<List<Account>> LoadAccountListAsync()
+        public static async Task<List<Account>> LoadAccountListAsync()
         {
             if (File.Exists(_accountListPath))
             {
@@ -71,14 +72,15 @@ namespace NFP_IC.Utils
         /// </summary>
         /// <param name="listAsXml">XML formatted list of accounts</param>
         /// <returns>List object of accounts</returns>
-        internal static List<Account> DeserializeXmlToAccountList(string listAsXml)
+        public static List<Account> DeserializeXmlToAccountList(string listAsXml)
         {
             XmlSerializer xmlizer = new XmlSerializer(typeof(List<Account>));
             TextReader textreader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(listAsXml)));
 
             return AccountList = (xmlizer.Deserialize(textreader)) as List<Account>;
         }
-        internal static Account AddAccount(string username)
+
+        public static Account AddAccount(string username)
         {
             // Create a new account with the username
             Account account = new Account() { Username = username };
@@ -89,7 +91,7 @@ namespace NFP_IC.Utils
             return account;
         }
 
-        internal static void RemoveAccount(Account account)
+        public static void RemoveAccount(Account account)
         {
             // Remove the account from the accounts list
             AccountList.Remove(account);
