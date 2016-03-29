@@ -82,7 +82,7 @@ namespace NFP_IC.Views
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 logText = logText;// + "\nLost at " + DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second + "\n";
-                AppText.Text = "\n" + logText;
+                AppText.Text = "\n" + tagUID;
             });
         }
 
