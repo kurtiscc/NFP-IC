@@ -46,6 +46,7 @@ namespace NFP_IC.Views
 
         private CancellationTokenSource _cts = null;
         private String Stringlat, Stringlng, addressString;
+        private string tagUID;
 
         // The list of records 
         private List<NdefRecord> recordList;
@@ -75,12 +76,12 @@ namespace NFP_IC.Views
 
 
 
-         private async void DeviceDeparted(ProximityDevice sender)
+        private async void DeviceDeparted(ProximityDevice sender)
         {
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,() =>
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 logText = logText;// + "\nLost at " + DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second + "\n";
-                AppText.Text = "\n" + logText; 
+                AppText.Text = "\n" + logText;
             });
         }
 
@@ -107,7 +108,7 @@ namespace NFP_IC.Views
         private async void MessageReceived(ProximityDevice sender, ProximityMessage message)
         {
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            { 
+            {
                 if (device != null)
                 {
                     device.StopSubscribingForMessage(subscriptionId);
@@ -117,7 +118,7 @@ namespace NFP_IC.Views
                 //ScrollViewer.UpdateLayout();
                 //ScrollViewer.ScrollToVerticalOffset(0); 
                 SubscribeForMessage();
-            });            
+            });
         }
 
         /// <summary>
@@ -126,34 +127,36 @@ namespace NFP_IC.Views
         /// </summary>
         /// <param name="message">The message to parse.</param>
         /// <returns>The parsed details as a string.</returns>
-        private string ParseNDEF(ProximityMessage message) {
+        private string ParseNDEF(ProximityMessage message)
+        {
             var output = "";
 
-            using (var buf = DataReader.FromBuffer(message.Data)) {
-                NdefRecordUtility.ReadNdefRecord(buf,recordList);
+            using (var buf = DataReader.FromBuffer(message.Data))
+            {
+                NdefRecordUtility.ReadNdefRecord(buf, recordList);
 
                 for (int i = 0, recordNumber = 0, spRecordNumber = 0; i < recordList.Count; i++)
                 {
                     NdefRecord record = recordList.ElementAt(i);
 
-                    if (!record.IsSpRecord ) 
+                    if (!record.IsSpRecord)
                     {
-                        if (System.Text.Encoding.UTF8.GetString(record.Type, 0, record.TypeLength) == "Sp") 
+                        if (System.Text.Encoding.UTF8.GetString(record.Type, 0, record.TypeLength) == "Sp")
                         {
                             //output = output + "\n --End of Record No." + recordNumber; spRecordNumber = 0;
                             continue;
                         }
-                        else 
-                        { 
-                            recordNumber++; 
+                        else
+                        {
+                            recordNumber++;
                             //output = output + "\n --Record No." + recordNumber; 
                         }
                     }
                     else
                     {
-                        if (spRecordNumber == 0) 
-                        { 
-                            recordNumber++; 
+                        if (spRecordNumber == 0)
+                        {
+                            recordNumber++;
                             //output = output + "\n --Record No." + recordNumber; 
                         }
 
@@ -167,18 +170,18 @@ namespace NFP_IC.Views
                     //output = output + " SR:" + ((record.Sr) ? "1;" : "0;");
                     //output = output + " IL:" + ((record.Il) ? "1;" : "0;");
 
-                    string typeName = NdefRecordUtility.GetTypeNameFormat(record);                     
-                    
-                    if (record.TypeLength > 0) 
-                    { 
+                    string typeName = NdefRecordUtility.GetTypeNameFormat(record);
+
+                    if (record.TypeLength > 0)
+                    {
                         //output = output + "\n Type: " + typeName + ":"
-                          //  + System.Text.Encoding.UTF8.GetString(record.Type, 0, record.TypeLength); 
+                        //  + System.Text.Encoding.UTF8.GetString(record.Type, 0, record.TypeLength); 
                     }
 
                     if ((record.Il) && (record.IdLength > 0))
                     {
                         output = output + "\n Id:"
-                            + System.Text.Encoding.UTF8.GetString(record.Id, 0, record.IdLength); 
+                            + System.Text.Encoding.UTF8.GetString(record.Id, 0, record.IdLength);
                     }
 
                     if ((record.PayloadLength > 0) && (record.Payload != null))
@@ -198,19 +201,22 @@ namespace NFP_IC.Views
                             //output = output + "\n Language: " + text.Language;
                             //output = output + "\n Encoding: " + text.Encoding;
                             output = output + "\n TagUID: " + text.Text;
+                            tagUID = text.Text;
+                            Debug.WriteLine(tagUID);
+
                         }
                         else
                         {
-                            if (record.Tnf==0x01) 
+                            if (record.Tnf == 0x01)
                             {
-                               // output = output + "\n Payload:"
-                                 //   + System.Text.Encoding.UTF8.GetString(record.Payload, 0, record.Payload.Length);
+                                // output = output + "\n Payload:"
+                                //   + System.Text.Encoding.UTF8.GetString(record.Payload, 0, record.Payload.Length);
                             }
                         }
                     }
 
-                    if (!record.IsSpRecord) 
-                    { 
+                    if (!record.IsSpRecord)
+                    {
                         //output = output + "\n --End of Record No." + recordNumber;
                     }
                 }
@@ -224,7 +230,7 @@ namespace NFP_IC.Views
         /// about the NFC events.
         /// </summary>
         private void SubscribeForMessage()
-        {            
+        {
             if (device != null)
             {
                 recordList.Clear();
@@ -257,7 +263,7 @@ namespace NFP_IC.Views
                         CancellationToken token = _cts.Token;
 
                         // If DesiredAccuracy or DesiredAccuracyInMeters are not set (or value is 0), DesiredAccuracy.Default is used.
-                        Geolocator geolocator = new Geolocator {};
+                        Geolocator geolocator = new Geolocator { };
 
                         // Carry out the operation
                         Geoposition pos = await geolocator.GetGeopositionAsync().AsTask(token);
@@ -278,11 +284,11 @@ namespace NFP_IC.Views
             }
             catch (TaskCanceledException)
             {
-               
+
             }
             catch (Exception ex)
             {
-              
+
             }
             finally
             {
@@ -324,7 +330,7 @@ namespace NFP_IC.Views
                 // contained in the address of the first result.
                 if (result.Status == MapLocationFinderStatus.Success)
                 {
-                    addressString = result.Locations[0].Address.StreetNumber +  " " + result.Locations[0].Address.Street + " " + result.Locations[0].Address.Town
+                    addressString = result.Locations[0].Address.StreetNumber + " " + result.Locations[0].Address.Street + " " + result.Locations[0].Address.Town
                         + " " + result.Locations[0].Address.Region + " " + result.Locations[0].Address.PostCode;
                     Debug.WriteLine(addressString);
                     sendDataToEndpoint(addressString, Stringlat, Stringlng);
@@ -346,18 +352,18 @@ namespace NFP_IC.Views
             string json = JsonConvert.SerializeObject(tempSet);
 
             //POSTing
-            string serverAddress = "http://nfp-project.azurewebsites.net/addtrackingstep/"+tagID;
+            string serverAddress = "http://nfp-project.azurewebsites.net/addtrackingstep/" + tagID;
             HttpClient httpClient = new HttpClient();
             HttpRequestMessage msg = new HttpRequestMessage(new HttpMethod("POST"), new Uri(serverAddress));
             msg.Content = new HttpStringContent(json);
             msg.Content.Headers.ContentType = new Windows.Web.Http.Headers.HttpMediaTypeHeaderValue("application/json");
             HttpResponseMessage response = await httpClient.SendRequestAsync(msg).AsTask();
-         }
+        }
         private string getCurrentTimeStamp()
         {
             var utcOffset = TimeZoneInfo.Local.GetUtcOffset(DateTime.UtcNow);
             var formattedOffset = utcOffset.ToString("hhmm");
-            var timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff'-'"+ formattedOffset);
+            var timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff'-'" + formattedOffset);
             return timestamp;
         }
     }

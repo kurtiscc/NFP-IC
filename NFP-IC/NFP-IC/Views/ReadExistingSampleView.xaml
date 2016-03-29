@@ -9,8 +9,16 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-          
           EntranceNavigationTransitionInfo.IsTargetElement="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" x:Name="AppText" Text="TagUID: " Margin="0,30,0,0" />
+
 
         <!-- <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Read Existing Sample"/>-->
 
@@ -28,12 +36,11 @@
             </Grid>
         </ScrollViewer>-->
 
-        <TextBlock x:Name="AppText" Grid.Row="0" />
 
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Click To Scan a Tag" Click="Scan_Button_Clicked">
-            <!--   <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Click To Scan a Tag" SelectionChanged="TextBlock_SelectionChanged" ></TextBlock>-->
-        </Button> 
-        <Maps:MapControl HorizontalAlignment="Center" Margin="0,420,0,0" VerticalAlignment="Top" Height="220" Width="360"/>
+            <Button Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Click To Scan a Tag" Click="Scan_Button_Clicked">
+                <!--   <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Click To Scan a Tag" SelectionChanged="TextBlock_SelectionChanged" ></TextBlock>-->
+            </Button>
+            <Maps:MapControl  Grid.Row="3"/>
 
     </Grid>
     
