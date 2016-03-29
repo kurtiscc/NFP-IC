@@ -1,5 +1,5 @@
-﻿using System;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace NFP_IC.Views
 {
@@ -11,6 +11,10 @@ namespace NFP_IC.Views
         public SearchBrowseView()
         {
             this.InitializeComponent();
+         
         }
+
+       
+
     }
 }
