@@ -37,6 +37,7 @@ namespace NFP_IC.Views
         public string lat;
         public string lon;
         public string addr;
+        public string userid;
         public string purpose;
         public string timestamp;
 
@@ -342,6 +343,7 @@ namespace NFP_IC.Views
             tempSet.lat = lat;
             tempSet.lon = lng;
             tempSet.purpose = "Testing";
+            tempSet.userid = "admin";
             tempSet.timestamp = getCurrentTimeStamp();
             string json = JsonConvert.SerializeObject(tempSet);
 

@@ -28,8 +28,6 @@
                 <TextBlock x:Name="PassportStatusText" Text="Microsoft Passport is ready to use!"
              Margin="4" TextAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
             </Border>
-            <TextBlock x:Name="LoginExplaination" FontSize="24" TextAlignment="Center" TextWrapping="Wrap" 
-        Text="Please Note: To demonstrate a login, validation will only occur using the default username &#39;sampleUsername&#39;"/>
         </StackPanel>
     </Grid>
 </Page>
