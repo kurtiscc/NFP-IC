@@ -56,7 +56,7 @@ namespace NFP_IC.Views
                 if (await MicrosoftPassportHelper.CreatePassportKeyAsync(UsernameTextBox.Text))
                 {
                     Debug.WriteLine("Successfully signed in with Microsoft Passport!");
-                    Frame.Navigate(typeof(Views.SearchBrowseView));
+                    Frame.Navigate(typeof(Views.ReadExistingSampleView));
                 }
             }
             else
