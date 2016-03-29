@@ -9,8 +9,18 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
           EntranceNavigationTransitionInfo.IsTargetElement="True">
-
-        <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Track Sample"/>
+        <Button x:Name="button" Content="Start Scanning" HorizontalAlignment="Left" Margin="116,323,0,0" VerticalAlignment="Top" Width="125" Click="button_Click"/>
+        <Button x:Name="button1" Content="Submit" HorizontalAlignment="Left" Margin="116,399,0,0" VerticalAlignment="Top" Width="125" Click="button1_Click"/>
+        <TextBlock x:Name="TagUID" HorizontalAlignment="Left" Margin="10,151,0,0" TextWrapping="Wrap" Text="Tag UID:" VerticalAlignment="Top" SelectionChanged="textBlock_SelectionChanged"/>
+        <TextBlock x:Name="Time" HorizontalAlignment="Left" Margin="10,176,0,0" TextWrapping="Wrap" Text="Time:" VerticalAlignment="Top" SelectionChanged="textBlock1_SelectionChanged"/>
+        <TextBlock x:Name="Latitude" HorizontalAlignment="Left" Margin="8,201,0,0" TextWrapping="Wrap" Text="Latitude:" VerticalAlignment="Top" SelectionChanged="Latitude_SelectionChanged"/>
+        <TextBlock x:Name="Longitude" HorizontalAlignment="Left" Margin="10,226,0,0" TextWrapping="Wrap" Text="Longitude:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="TimePopulated" HorizontalAlignment="Left" Margin="116,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="TagUIDPopulated" HorizontalAlignment="Left" Margin="116,151,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="LatitudePopulated" HorizontalAlignment="Left" Margin="116,201,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="LongitudePopulated" HorizontalAlignment="Left" Margin="116,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="Address" HorizontalAlignment="Left" Margin="10,251,0,0" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" RenderTransformOrigin="-0.333,0.517"/>
+        <TextBlock x:Name="AddressPopulated" HorizontalAlignment="Left" Margin="116,251,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
