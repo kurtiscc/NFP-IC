@@ -22,6 +22,8 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Streams;
 
+using Windows.UI.Xaml.Controls.Maps;
+
 
 
 namespace NFP_IC.Views
@@ -72,6 +74,7 @@ namespace NFP_IC.Views
             device.DeviceArrived += DeviceArrived;
             device.DeviceDeparted += DeviceDeparted;
             SubscribeForMessage();
+            //AddMapIcon();
         }
 
 
@@ -95,7 +98,7 @@ namespace NFP_IC.Views
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 //logText = "\nDetected at " + DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second;
-                logText = "Boo";
+                //logText = "Boo";
             });
         }
 
@@ -165,12 +168,6 @@ namespace NFP_IC.Views
                         //output = output + "\n Sp sub-record No." + spRecordNumber; 
                     }
 
-                    //output = output + "\n MB:" + ((record.Mb) ? "1;" : "0;");
-                    //output = output + " ME:" + ((record.Me) ? "1;" : "0;");
-                    //output = output + " CF:" + ((record.Cf) ? "1;" : "0;");
-                    //output = output + " SR:" + ((record.Sr) ? "1;" : "0;");
-                    //output = output + " IL:" + ((record.Il) ? "1;" : "0;");
-
                     string typeName = NdefRecordUtility.GetTypeNameFormat(record);
 
                     if (record.TypeLength > 0)
@@ -184,7 +181,7 @@ namespace NFP_IC.Views
                         output = output + "\n Id:"
                             + System.Text.Encoding.UTF8.GetString(record.Id, 0, record.IdLength);
                     }
-
+                    
                     if ((record.PayloadLength > 0) && (record.Payload != null))
                     {
                         if ((record.Tnf == 0x01)
@@ -204,6 +201,8 @@ namespace NFP_IC.Views
                             output = output + "\n TagUID: " + text.Text;
                             tagUID = text.Text;
                             Debug.WriteLine(tagUID);
+                            AppText.Text = tagUID;
+                            return output;
 
                         }
                         else
@@ -223,7 +222,7 @@ namespace NFP_IC.Views
                 }
             }
 
-            return output;
+           return output;
         }
 
         /// <summary>
@@ -242,7 +241,18 @@ namespace NFP_IC.Views
 
 
 
-
+        async private void AddMapIcon(string stepLat, string stepLon, string label)
+        {
+            double lat = Convert.ToDouble(stepLat);
+            double lon = Convert.ToDouble(stepLon);
+            BasicGeoposition geoPos = new BasicGeoposition() { Latitude = lat, Longitude = lon };
+            MapIcon MapIcon1 = new MapIcon();
+            MapIcon1.Location = new Geopoint(geoPos);
+            MapIcon1.NormalizedAnchorPoint = new Point(0.5, 1.0);
+            MapIcon1.Title = label;
+            trackingMap.MapElements.Add(MapIcon1);
+            await trackingMap.TrySetViewAsync(MapIcon1.Location, 12D);
+        }
 
 
 
