@@ -40,7 +40,10 @@
             <Button Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Click To Scan a Tag" Click="Scan_Button_Clicked">
                 <!--   <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Click To Scan a Tag" SelectionChanged="TextBlock_SelectionChanged" ></TextBlock>-->
             </Button>
-            <Maps:MapControl  Grid.Row="3"/>
+            <Maps:MapControl
+                Grid.Row="3"
+                x:Name="trackingMap"
+                MapServiceToken="kNUiXXc0gJT5gtN8hB6M~72UUSaBMRKjmvUIjVHDAOw~Aoy0QiSN3XXfYx4UuFZnn29M3uQRZxaPGC9Gg_M1umURZs8uZzGytJE2W1lwGWoh"/>
 
     </Grid>
     

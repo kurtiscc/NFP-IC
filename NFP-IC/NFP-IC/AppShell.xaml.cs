@@ -48,7 +48,7 @@ namespace NFP_IC
                     Symbol = Symbol.Link,
                     Label = "NFP Website",
                     DestinationPage = typeof(Uri),
-                    Arguments = "http://nfp.capstone.it.et.byu.edu",
+                    Arguments = "http://nfp-project.azurewebsites.net",
                 }
             });
 

@@ -110,7 +110,7 @@ namespace NFP_IC.Utils
                 return false;
             }
 
-            if (!string.Equals(username, "admin"))
+            if (!string.Equals(username, "Admin"))
             {
                 return false;
             }
